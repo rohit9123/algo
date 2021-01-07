@@ -1,7 +1,8 @@
 #include<iostream>
+#include<queue>
 using namespace std;
 
-void bfs(int** graph,int index,int vertices,int* visited){
+void dfs(int** graph,int index,int vertices,int* visited){
 
     cout<<index<<endl;
     for(int i=0;i<vertices;i++){
@@ -10,7 +11,7 @@ void bfs(int** graph,int index,int vertices,int* visited){
         }
         if(graph[index][i]&&!visited[i]){
             visited[i]=true;
-            bfs(graph,i,vertices,visited);
+            dfs(graph,i,vertices,visited);
         }
 
     }
@@ -18,7 +19,28 @@ void bfs(int** graph,int index,int vertices,int* visited){
 
 }
 
+void bfs(int** graph,int index,int vertix){
+    queue<int> help;
+    help.push(index);
+    int visited[vertix];
+    for(int i=0;i<vertix;i++){
+        visited[i]=false;
+    }
+    visited[index]=true;
+    while(help.size()){
+        cout<<help.front()<<endl;
+        int workingvertex=help.front();
+        help.pop();
+        for(int i=0;i<vertix;i++){
+            if(graph[workingvertex][i]==1&&!visited[i]){
+                help.push(i);
+                visited[i]=true;
+            }
+        }
+    }
 
+
+}
 
 int main(){
     int vertices;
@@ -47,7 +69,10 @@ int main(){
         visited[i]=false;
     }
     visited[0]=true;
-    bfs(graph,0,vertices,visited);
+    cout<<"dfs"<<endl;
+    dfs(graph,0,vertices,visited);
+    cout<<"bfs"<<endl;
+    bfs(graph,0,vertices);
     delete [] visited;
     for(int i=0;i<vertices;i++){
         delete [] graph[i];
