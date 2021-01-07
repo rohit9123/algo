@@ -19,14 +19,14 @@ void dfs(int** graph,int index,int vertices,int* visited){
 
 }
 
-void bfs(int** graph,int index,int vertix){
+void bfs(int** graph,int index,int vertix,int* visited){
     queue<int> help;
     help.push(index);
-    int visited[vertix];
-    for(int i=0;i<vertix;i++){
-        visited[i]=false;
-    }
-    visited[index]=true;
+    // int visited[vertix];
+    // for(int i=0;i<vertix;i++){
+    //     visited[i]=false;
+    // }
+    // visited[index]=true;
     while(help.size()){
         cout<<help.front()<<endl;
         int workingvertex=help.front();
@@ -68,11 +68,26 @@ int main(){
     for(int i=0;i<vertices;i++){
         visited[i]=false;
     }
-    visited[0]=true;
+    // visited[0]=true;
     cout<<"dfs"<<endl;
-    dfs(graph,0,vertices,visited);
+    for(int i=0;i<vertices;i++){
+    if (!visited[i]){
+    visited[i]=true;
+    dfs(graph,i,vertices,visited);
+    };
+    }
+    
     cout<<"bfs"<<endl;
-    bfs(graph,0,vertices);
+    for(int i=0;i<vertices;i++){
+        visited[i]=false;
+    }
+    for(int i=0;i<vertices;i++){
+        if(!visited[i]){
+            visited[i]=true;
+            bfs(graph,i,vertices,visited);
+        }
+    }
+    
     delete [] visited;
     for(int i=0;i<vertices;i++){
         delete [] graph[i];
