@@ -3,11 +3,14 @@
 #include<stdlib.h>
 using namespace std;
 
+
+//structure of trie
 struct TrieNode{
     struct TrieNode* children[26];
     bool isend;
 };
 
+//to create a node 
 struct TrieNode* getNode(){
     struct TrieNode *node=new TrieNode;
     node->isend=false;
@@ -16,6 +19,9 @@ struct TrieNode* getNode(){
     }
     return node;
 }
+
+
+// inserting a string
 void insert(string key,struct TrieNode* head){
     struct TrieNode* tri=head;
     int le=key.size();
@@ -29,6 +35,10 @@ void insert(string key,struct TrieNode* head){
     }
     tri->isend=true;
 }
+
+
+
+//searching for  a key
 bool search(string key,TrieNode* head){
     struct TrieNode* tri=head;
     for(int i=0;i<key.size();i++){
@@ -44,6 +54,8 @@ bool search(string key,TrieNode* head){
     return false;
 }
 
+
+//helper for delete
 bool check(struct TrieNode* head){
     for(int i=0;i<26;i++){
         if(head->children[i]!=NULL){
@@ -53,12 +65,12 @@ bool check(struct TrieNode* head){
     return true;
 }
 
-
+//deleting a string
 struct TrieNode* del(string key,struct TrieNode* head,int index){
     if(head==NULL){
         return NULL;
     }
-     cout<<index<<" "<<key[index]<<endl;
+   
     if(index==key.size()){
         head->isend=false;
         if(check(head)){

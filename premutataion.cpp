@@ -43,11 +43,11 @@ vector<vector<int> > ans;
 int main(){
     vector<int> k;
     k.push_back(0);
-    k.push_back(2);
-    k.push_back(3);
-    k.push_back(4);
     k.push_back(1);
-    k.push_back(5);
+    k.push_back(2);
+    k.push_back(2);
+    k.push_back(4);
+    // k.push_back(5);
 
     permute(k);
     return 0;
