@@ -1,8 +1,8 @@
 #include<iostream>
 #include<queue>
 using namespace std;
-
-void dfs(int** graph,int index,int vertices,int* visited){
+bool ans=false;
+void dfs(int** graph,int index,int vertices,bool* visited){
 
     cout<<index<<endl;
     for(int i=0;i<vertices;i++){
@@ -19,7 +19,8 @@ void dfs(int** graph,int index,int vertices,int* visited){
 
 }
 
-void bfs(int** graph,int index,int vertix,int* visited){
+
+void bfs(int** graph,int index,int vertix,bool* visited){
     queue<int> help;
     help.push(index);
     // int visited[vertix];
@@ -39,6 +40,30 @@ void bfs(int** graph,int index,int vertix,int* visited){
         }
     }
 
+
+}
+
+bool findpath(int** graph,int source,int destination,bool* visited,int vertix,queue<int> path){
+    if(source==destination){
+        // ans=true;
+        return 1;
+    }
+    int result=0;
+    for(int i=0;i<vertix;i++){
+        if(graph[source][i]==1&&!visited[i]){
+            visited[i]=true;
+            result=findpath(graph,i,destination,visited,vertix,path);
+            if(result==1){
+                path.push(i);
+                return 1;
+            }
+            
+            
+        }
+    }
+
+
+    return result;
 
 }
 
@@ -64,8 +89,33 @@ int main(){
         graph[a][b]=1;
         graph[b][a]=1;
     }
-    int* visited=new int[vertices];
+   
+
+
+
+    bool* visited=new bool[vertices];
     for(int i=0;i<vertices;i++){
+        visited[i]=false;
+    }
+
+
+    queue<int> path;
+     path.push(0);
+    if(findpath(graph,0,5,visited,vertices,path)){
+        while (path.size())
+        {
+            cout<<path.front()<<" ";
+            path.pop();
+            /* code */
+        }
+        cout<<endl;
+        
+    }
+    
+
+
+
+     for(int i=0;i<vertices;i++){
         visited[i]=false;
     }
     // visited[0]=true;
