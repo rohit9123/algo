@@ -131,6 +131,14 @@ for(int i=0;i<n;i++){
 }
 cout<<endl;
 
+
+
+
+//union  solution   
+
+
+
+
 int unions[n];
 for(int i=0;i<v;i++){
     unions[i]=i;
