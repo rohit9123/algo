@@ -95,6 +95,7 @@ void solve(){
  while(q--){
    int l,r;
    cin>>l>>r;
+  //idempotent function
    int power=log[r-l+1];
    cout<<min(sparetable[l][power],sparetable[r-(1<<power)+1][power])<<endl;
  }
